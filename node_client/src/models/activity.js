@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../db');
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../db");
 
 class Activity extends Model {}
 
@@ -15,18 +15,18 @@ Activity.init(
       allowNull: false,
     },
     start_date: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
     },
     end_date: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
     },
   },
   {
     sequelize,
-    modelName: 'Activity',
-    tableName: 'activities',
+    modelName: "Activity",
+    tableName: "activities",
     timestamps: true,
   }
 );
