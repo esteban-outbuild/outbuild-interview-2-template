@@ -3,6 +3,8 @@ import axios from 'axios';
 
 function App() {
   const [activities, setActivities] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [newActivity, setNewActivity] = useState({
     schedule_id: '',
     start_date: '',
@@ -17,8 +19,10 @@ function App() {
     try {
       const response = await axios.get('http://localhost:3001/api/activities');
       setActivities(response.data);
-    } catch (error) {
-      console.error('Error fetching activities:', error);
+      setLoading(false);
+    } catch (err) {
+      setError('Failed to fetch activities');
+      setLoading(false);
     }
   };
 
@@ -39,6 +43,9 @@ function App() {
       [e.target.name]: e.target.value,
     });
   };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <div style={{ padding: '20px' }}>
@@ -78,27 +85,41 @@ function App() {
         <button type='submit'>Add Activity</button>
       </form>
 
-      <h2>Activities List</h2>
-      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Schedule ID</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {activities.map((activity) => (
-            <tr key={activity.id}>
-              <td>{activity.id}</td>
-              <td>{activity.schedule_id}</td>
-              <td>{new Date(activity.start_date).toLocaleString()}</td>
-              <td>{new Date(activity.end_date).toLocaleString()}</td>
+      <div style={{ marginTop: '20px' }}>
+        <h2>Activities List</h2>
+        <table
+          style={{
+            width: '100%',
+            borderCollapse: 'collapse',
+            marginTop: '10px',
+          }}
+        >
+          <thead>
+            <tr style={{ backgroundColor: '#f5f5f5' }}>
+              <th style={{ padding: '10px', textAlign: 'left' }}>ID</th>
+              <th style={{ padding: '10px', textAlign: 'left' }}>
+                Schedule ID
+              </th>
+              <th style={{ padding: '10px', textAlign: 'left' }}>Start Date</th>
+              <th style={{ padding: '10px', textAlign: 'left' }}>End Date</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {activities.map((activity) => (
+              <tr key={activity.id} style={{ borderBottom: '1px solid #eee' }}>
+                <td style={{ padding: '10px' }}>{activity.id}</td>
+                <td style={{ padding: '10px' }}>{activity.schedule_id}</td>
+                <td style={{ padding: '10px' }}>
+                  {new Date(activity.start_date).toLocaleString()}
+                </td>
+                <td style={{ padding: '10px' }}>
+                  {new Date(activity.end_date).toLocaleString()}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
