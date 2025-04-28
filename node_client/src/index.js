@@ -54,7 +54,7 @@ sequelize
       await Activity.bulkCreate(seedData);
       console.log("Seed data inserted successfully");
     } else {
-      console.log("Database already contains data, skipping seed");
+      console.log("Database already contains data, skipping seed (Activity count: " + count + ")");
     }
 
     app.listen(PORT, () => {
