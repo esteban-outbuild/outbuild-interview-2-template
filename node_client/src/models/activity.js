@@ -10,6 +10,10 @@ Activity.init(
       primaryKey: true,
       autoIncrement: true,
     },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     schedule_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -25,8 +29,8 @@ Activity.init(
   },
   {
     sequelize,
-    modelName: "Activity",
-    tableName: "activities",
+    modelName: 'Activity',
+    tableName: 'activities',
     timestamps: true,
   }
 );
