@@ -10,6 +10,7 @@ activitiesRouter.get("/", async (req, res) => {
       const ganttIndex = acc.findIndex(
         (gantt) => gantt.id === activity.schedule_id
       );
+      activity.dataValues.name = `Activity #${activity.id}`;
       activity.dataValues.status =
         new Date(activity.end_date) < new Date() ? "Done" : "Pending";
       if (ganttIndex === -1) {
