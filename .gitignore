@@ -64,3 +64,5 @@ pids
 /node_client/.env
 !node_client/.env.example
 /node_client/dist/
+
+*.csv

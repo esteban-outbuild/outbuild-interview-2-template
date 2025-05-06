@@ -9,8 +9,7 @@ This is a full-stack application for managing activities with a Node.js backend 
 
 ## Prerequisites
 
-- Node.js (v14 or higher)
-- PostgreSQL (v12 or higher)
+- Node.js (=v22.15.0)
 - npm or yarn
 
 ## Setup Instructions

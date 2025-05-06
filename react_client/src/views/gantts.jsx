@@ -25,7 +25,6 @@ export default function Gantts() {
   useEffect(() => {
     const fetchGantts = async () => {
       const gantts = await getAll();
-      console.log(gantts);
       setGantts(gantts);
     };
     fetchGantts();
