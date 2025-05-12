@@ -21,33 +21,23 @@ Activity.init(
     start_date: {
       type: DataTypes.DATEONLY,
       allowNull: false,
-      validate: {
-        isDate: true,
-        isFormatValid(value) {
-          if (!value) {
-            throw new Error('Start date cannot be null');
-          }
-          const dateFormatRegex = /^\d{4}-\d{2}-\d{2}$/;
-          if (!dateFormatRegex.test(value)) {
-            throw new Error('Start date must be in YYYY-MM-DD format');
-          }
-        },
+      set(value) {
+        // Reject non-ISO date formats like "Mar 01"
+        if (typeof value === 'string' && !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+          throw new Error('Start date must be in YYYY-MM-DD format');
+        }
+        this.setDataValue('start_date', value);
       },
     },
     end_date: {
       type: DataTypes.DATEONLY,
       allowNull: false,
-      validate: {
-        isDate: true,
-        isFormatValid(value) {
-          if (!value) {
-            throw new Error('End date cannot be null');
-          }
-          const dateFormatRegex = /^\d{4}-\d{2}-\d{2}$/;
-          if (!dateFormatRegex.test(value)) {
-            throw new Error('End date must be in YYYY-MM-DD format');
-          }
-        },
+      set(value) {
+        // Reject non-ISO date formats like "Mar 01"
+        if (typeof value === 'string' && !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+          throw new Error('End date must be in YYYY-MM-DD format');
+        }
+        this.setDataValue('end_date', value);
       },
     },
   },
