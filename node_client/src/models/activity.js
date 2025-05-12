@@ -22,7 +22,6 @@ Activity.init(
       type: DataTypes.DATEONLY,
       allowNull: false,
       set(value) {
-        // Reject non-ISO date formats like "Mar 01"
         if (typeof value === 'string' && !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
           throw new Error('Start date must be in YYYY-MM-DD format');
         }
@@ -33,7 +32,6 @@ Activity.init(
       type: DataTypes.DATEONLY,
       allowNull: false,
       set(value) {
-        // Reject non-ISO date formats like "Mar 01"
         if (typeof value === 'string' && !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
           throw new Error('End date must be in YYYY-MM-DD format');
         }
